@@ -12,8 +12,26 @@
     <!-- <link rel="stylesheet" href="style.css" type="text/css"> -->
 
     <style>
-        
-        
+        #resizable {
+            background-position: top left;
+        }
+
+        #resizable,
+        #also {
+            width: 150px;
+            height: 120px;
+            padding: 0.5em;
+        }
+
+        #resizable h3,
+        #also h3 {
+            text-align: center;
+            margin: 0;
+        }
+
+        #also {
+            margin-top: 1em;
+        }
     </style>
 
     <title>JQuery test</title>
@@ -21,11 +39,31 @@
 
 <body>
 
-    
+    <div id="resizable" class="ui-widget-content">
+        <h3 class="ui-widget-header">Resizable. If width reaches 500px, 
+            callback for resize event will be trigerred: red bgr</h3>
+    </div>
+
+    <div id="also" class="ui-widget-content">
+        <h3 class="ui-widget-header">will also resize</h3>
+    </div>
 
     <script type="text/javascript">
         $(function () {
-           
+            $("#resizable").resizable({
+                grid: 100,
+                alsoResize: "#also",
+                resize: function (event, ui) {
+
+                    if ($("#resizable").width() > 500) {
+                        alert("Hi");
+                        $("body").css("background", "red");
+                    }
+                }
+
+            });
+
+            $("#also").resizable();
         });
     </script>
 
