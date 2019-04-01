@@ -12,12 +12,33 @@
     <!-- <link rel="stylesheet" href="style.css" type="text/css"> -->
 
     <style>
-        #draggable {
-            width: 150px;
-            height: 150px;
+        .draggable {
+            width: 90px;
+            height: 90px;
             padding: 0.5em;
-            background: lightblue;
+            float: left;
+            margin: 0 10px 10px 0;
         }
+
+        #draggable
+         {
+            margin-bottom: 20px;
+        }
+
+        #draggable {
+            cursor: n-resize;
+        }
+
+        
+
+        #containment-wrapper {
+            width: 95%;
+            height: 150px;
+            border: 2px solid #ccc;
+            padding: 10px;
+        }
+
+        
     </style>
 
     <title>JQuery test</title>
@@ -26,12 +47,25 @@
 <body>
 
     <div id="draggable" class="ui-widget-content">
-        <p>Drag me around</p>
+        <p>Drag me vertically</p>
+    </div>
+
+    <div id="containment-wrapper" style="width:400px; height:400px;background:lightpink">
+        
+            <span id="draggable3" class="draggable ui-widget-content">I'm a span contained within the box</span>
+       
     </div>
 
     <script type="text/javascript">
         $(function () {
-            $("#draggable").draggable();
+            $("#draggable").draggable({
+                axis: "y"
+            });
+
+            $("#draggable3").draggable({
+                containment: "#containment-wrapper",
+                scroll: false
+            });
         });
     </script>
 
